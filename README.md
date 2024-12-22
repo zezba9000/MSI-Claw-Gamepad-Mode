@@ -1,5 +1,6 @@
 # MSI-Claw-Gamepad-Mode
 * Install base dev package on your distro that includes gcc
+* chmod 777 ./install.sh
 * Run install.sh on any distro that supports systemd
 * Restart computer
 
