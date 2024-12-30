@@ -11,7 +11,7 @@
 * Currently Gamescope version in CachyOS is working well but WiFi doesn't reconnect after sleep.<br>
 * For other Arch distros there is also this DKMS driver option as well: https://aur.archlinux.org/packages/hid-msi-claw-dkms-git
 
-# Installing a Gamescope distro like CachyOS
+# Installing on a Gamescope distro like CachyOS handheld-edition
 * Install using a USB hub that DOES NOT support HDMI
 * Reboot computer using keyboard and mouse to sign into Steam
 * Navigate to "Menu->Power->Switch to Desktop"
