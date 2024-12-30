@@ -8,8 +8,7 @@
 * Gamepade mode should now be working in Steam games, Chrome browser, CachyOS or Ubuntu like distros etc.<br>
 * Install script also adds a fix to make WiFi work again after sleep<br>
 * CachyOS is probably the best option atm.<br>
-* Currently Gamescope version in CachyOS is working well but WiFi doesn't reconnect after sleep.<br>
-* For other Arch distros there is also this DKMS driver option as well: https://aur.archlinux.org/packages/hid-msi-claw-dkms-git
+* For other Arch distros there is also this DKMS driver option as well but less tested: https://aur.archlinux.org/packages/hid-msi-claw-dkms-git
 
 # Installing on a Gamescope distro like CachyOS handheld-edition
 * Install using a USB hub that DOES NOT support HDMI
