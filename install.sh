@@ -18,6 +18,7 @@ chmod u+x /.MSI-Claw/msi-claw-gamepad-mode
 
 # install xpad config
 echo ""
+echo "Install xpad config..."
 CONFIG=/etc/udev/rules.d/90-msi-claw.rules
 if [ -e "$CONFIG" ]; then
     echo "xPad Config already exists '$CONFIG'"
@@ -33,6 +34,7 @@ EOF'
 
 # install menu buttons config
 echo ""
+echo "Install menu buttons config..."
 CONFIG=/usr/lib/udev/hwdb.d/60.msi.hwdb
 if [ -e "$CONFIG" ]; then
     echo "Menu-Button Config already exists '$CONFIG'"
@@ -50,6 +52,7 @@ EOF'
 
 # install menu buttons config systemd
 echo ""
+echo "Install menu buttons config for systemd..."
 CONFIG=/etc/systemd/hwdb.d/60-keyboard.hwdb
 if [ -e "$CONFIG" ]; then
     echo "Menu-Button systemd Config already exists '$CONFIG'"
@@ -132,6 +135,7 @@ EOF'
 
 # install HID trigger service
 echo ""
+echo "Installing HID trigger service..."
 CONFIG=/etc/systemd/system/msi-claw-gamepad.service
 if [ -e "$CONFIG" ]; then
     echo "Service config already exists '$CONFIG'"
@@ -156,6 +160,32 @@ Group=root
 WantedBy=multi-user.target suspend.target
 EOF'
 
+# Add WiFi not working after sleep fix
+echo ""
+echo "Adding WiFi after sleep fix..."
+CONFIG=/usr/lib/systemd/system-sleep/iwlwifi-sleep.sh
+if [ -e "$CONFIG" ]; then
+    echo "WiFi service already exists '$CONFIG'"
+else
+    echo "WiFi Service config file '$CONFIG'"
+    touch $CONFIG
+fi
+
+echo "Updating WiFi Service config"
+bash -c 'cat > /usr/lib/systemd/system-sleep/iwlwifi-sleep.sh << '\''EOF'\''
+#!/bin/bash
+
+case "$1" in
+  pre)
+    /usr/sbin/modprobe -r iwlmvm iwlwifi
+    ;;
+  post)
+    /usr/sbin/modprobe iwlwifi iwlmvm
+    ;;
+esac
+EOF'
+
+# finish
 echo "Reloading systemd stuff..."
 systemd-hwdb update
 udevadm trigger
