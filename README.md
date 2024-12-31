@@ -8,6 +8,7 @@
 * Gamepade mode should now be working in Steam games, Chrome browser, CachyOS or Ubuntu like distros etc.<br>
 * Install script also adds a fix to make WiFi work again after sleep<br>
 * CachyOS is probably the best option atm.<br>
+* NOTE: You may want to install a touch keyboard for desktop & enable it in KDE: "sudo pacman -S maliit-keyboard"
 * For other Arch distros there is also this DKMS driver option as well but less tested: https://aur.archlinux.org/packages/hid-msi-claw-dkms-git
 
 # Installing on a Gamescope distro like CachyOS handheld-edition
