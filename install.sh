@@ -184,6 +184,7 @@ case "$1" in
     ;;
 esac
 EOF'
+chmod +x $CONFIG
 
 # finish
 echo "Reloading systemd stuff..."
