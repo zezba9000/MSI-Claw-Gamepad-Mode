@@ -19,7 +19,7 @@
 * Navigate to "Menu->Power->Switch to Desktop"
 * Install this package and reboot
 
-## CachyOS desktop-edition
+### CachyOS desktop-edition
 * Install so the device auto logs in without needing a password
 * Install a touchscreen keyboard with: "sudo pacman -S maliit-keyboard" then in Virtual Keyboard settings enable it within KDE
 * Install Steam with: "sudo pacman -S steam"
