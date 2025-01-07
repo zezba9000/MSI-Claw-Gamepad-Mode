@@ -12,7 +12,7 @@
 * NOTE: You may want to install a virtual/touch keyboard for desktop & enable it in KDE: "sudo pacman -S maliit-keyboard"
 * For other Arch distros there is also this DKMS driver option as well but less tested: https://aur.archlinux.org/packages/hid-msi-claw-dkms-git
 
-# Installing on a Gamescope distro like CachyOS handheld-edition
+# Installing on CachyOS handheld-edition
 * Disable Secure-Boot in BIOS
 * Install using a USB hub that DOES NOT support HDMI if possible as they sometimes have issues
 * Reboot computer using keyboard and mouse to sign into Steam
