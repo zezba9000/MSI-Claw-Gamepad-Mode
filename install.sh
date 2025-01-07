@@ -4,6 +4,12 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+# install dependencies
+echo "Installing dependencies"
+pacman -Sy
+pacman -S gcc
+pacman -S inputplumber
+
 # compile HID mode app
 echo "Compiling HID mode app..."
 gcc -o2 main.c -o msi-claw-gamepad-mode
@@ -46,29 +52,14 @@ fi
 echo "Updating Menu-Button config"
 bash -c 'cat > /usr/lib/udev/hwdb.d/60.msi.hwdb << '\''EOF'\''
 evdev:name:AT Translated Set 2 keyboard:dmi:*:svnMicro-StarInternationalCo.,Ltd.:pnClawA1M:*
- KEYBOARD_KEY_b9=f15  #Right Button
- KEYBOARD_KEY_ba=f16  #Left Button
-EOF'
-
-# install menu buttons config systemd
-echo ""
-echo "Install menu buttons config for systemd..."
-CONFIG=/usr/lib/udev/hwdb.d/60-msi.hwdb
-if [ -e "$CONFIG" ]; then
-    echo "Menu-Button systemd Config already exists '$CONFIG'"
-else
-    mkdir "/etc/systemd/hwdb.d"
-    echo "Creating systemd Menu-Button config file '$CONFIG'"
-    touch $CONFIG
-fi
-
-echo "Updating Menu-Button systemd config"
-bash -c 'cat > /usr/lib/udev/hwdb.d/60-msi.hwdb << '\''EOF'\''
-# MSI Claw
-evdev:name:AT Translated Set 2 keyboard:dmi:*:svnMicro-StarInternationalCo.,Ltd.:pnClawA1M:*
  KEYBOARD_KEY_b9=f16  #Right Button
  KEYBOARD_KEY_ba=f15  #Left Button
 EOF'
+
+echo "Starting InputPlumber"
+systemctl enable inputplumber
+systemctl enable inputplumber-suspend
+systemctl start inputplumber
 
 # install HID trigger service
 echo ""

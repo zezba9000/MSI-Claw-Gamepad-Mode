@@ -1,15 +1,15 @@
 # Installing MSI-Claw-Gamepad-Mode
 * Install CachyOS (see below) [recomended]
-* Install base dev package on your distro that includes gcc
-* chmod 777 ./install.sh
-* Run "sudo ./install.sh" on any distro that supports systemd
+* Run "sudo ./install.sh" on a CachyOS install
 * Restart computer
+* Gamepade mode should now be working in Steam games, Chrome browser, CachyOS or Ubuntu like distros etc.<br>
 
 # Important notes
-* Gamepade mode should now be working in Steam games, Chrome browser, CachyOS or Ubuntu like distros etc.<br>
+* Install script is tested on CachyOS and will try to install everything needed<br>
 * Install script also adds a fix to make WiFi work again after sleep<br>
+* Install script will install InputPlumber which is needed for menu buttons<br>
 * CachyOS is probably the best option atm.<br>
-* NOTE: You may want to install a touch keyboard for desktop & enable it in KDE: "sudo pacman -S maliit-keyboard"
+* NOTE: You may want to install a virtual/touch keyboard for desktop & enable it in KDE: "sudo pacman -S maliit-keyboard"
 * For other Arch distros there is also this DKMS driver option as well but less tested: https://aur.archlinux.org/packages/hid-msi-claw-dkms-git
 
 # Installing on a Gamescope distro like CachyOS handheld-edition
