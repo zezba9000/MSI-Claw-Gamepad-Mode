@@ -78,6 +78,8 @@ Description=MSI Claw Gamepad mode switch
 After=multi-user.target suspend.target
 
 [Service]
+Type=simple
+ExecStartPre=/usr/bin/sleep 5
 ExecStart=/.MSI-Claw/msi-claw-gamepad-mode
 Restart=always
 User=root
