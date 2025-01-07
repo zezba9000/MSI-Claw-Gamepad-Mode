@@ -7,7 +7,6 @@ fi
 # install dependencies
 echo "Installing dependencies"
 pacman -Sy
-pacman -S gcc
 pacman -S inputplumber
 
 # compile HID mode app
