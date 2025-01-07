@@ -66,8 +66,8 @@ echo "Updating Menu-Button systemd config"
 bash -c 'cat > /usr/lib/udev/hwdb.d/60-msi.hwdb << '\''EOF'\''
 # MSI Claw
 evdev:name:AT Translated Set 2 keyboard:dmi:*:svnMicro-StarInternationalCo.,Ltd.:pnClawA1M:*
- KEYBOARD_KEY_b9=f15  #Right Button
- KEYBOARD_KEY_ba=f16  #Left Button
+ KEYBOARD_KEY_b9=f16  #Right Button
+ KEYBOARD_KEY_ba=f15  #Left Button
 EOF'
 
 # install HID trigger service
