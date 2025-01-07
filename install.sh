@@ -53,7 +53,7 @@ EOF'
 # install menu buttons config systemd
 echo ""
 echo "Install menu buttons config for systemd..."
-CONFIG=/etc/systemd/hwdb.d/60-keyboard.hwdb
+CONFIG=/usr/lib/udev/hwdb.d/60-msi.hwdb
 if [ -e "$CONFIG" ]; then
     echo "Menu-Button systemd Config already exists '$CONFIG'"
 else
@@ -63,7 +63,7 @@ else
 fi
 
 echo "Updating Menu-Button systemd config"
-bash -c 'cat > /etc/systemd/hwdb.d/60-keyboard.hwdb << '\''EOF'\''
+bash -c 'cat > /usr/lib/udev/hwdb.d/60-msi.hwdb << '\''EOF'\''
 # MSI Claw
 evdev:name:AT Translated Set 2 keyboard:dmi:*:svnMicro-StarInternationalCo.,Ltd.:pnClawA1M:*
  KEYBOARD_KEY_b9=f15  #Right Button
