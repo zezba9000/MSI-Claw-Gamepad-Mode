@@ -13,6 +13,8 @@ echo "Installing InputPlumber..."
 pacman -S inputplumber
 echo "Installing Steam..."
 pacman -S steam
+echo "Installing Disk manager..."
+pacman -S partitionmanager
 
 # install virtual keybaord
 echo "Installing Virtual Keyboard..."
@@ -37,6 +39,12 @@ kwriteconfig6 --file ksmserverrc --group General --key loginMode default
 kwriteconfig6 --file ksmserverrc --group General --key confirmLogout false
 kwriteconfig6 --file ksmserverrc --group General --key logoutPrompt false
 kwriteconfig6 --file ksmserverrc --group General --key offerShutdown false
+
+# always mount drives
+echo "Always mount drives"
+kwriteconfig6 --file kded_device_automounterrc --group General --key AutomountEnabled true
+kwriteconfig6 --file kded_device_automounterrc --group General --key AutomountOnLogin true
+kwriteconfig6 --file kded_device_automounterrc --group General --key AutomountOnAttached true
 
 # compile HID mode app
 echo "Compiling HID mode app..."
