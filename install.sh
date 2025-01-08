@@ -6,8 +6,37 @@ fi
 
 # install dependencies
 echo "Installing dependencies"
-pacman -Sy
+pacman -Syu
+echo "Installing GCC..."
+pacman -S gcc
+echo "Installing InputPlumber..."
 pacman -S inputplumber
+echo "Installing Steam..."
+pacman -S steam
+
+# install virtual keybaord
+echo "Installing Virtual Keyboard..."
+pacman -S maliit-keyboard
+kwriteconfig6 --file kcminputrc --group OnScreenKeyboard --key Enabled true
+kwriteconfig6 --file kcminputrc --group OnScreenKeyboard --key PreferredProvider maliit
+
+# force auto-login
+echo "Enable auto-login"
+CONFIG=/etc/sddm.conf.d/login.conf
+touch $CONFIG
+bash -c "cat > $CONFIG <<EOF
+[Autologin]
+User=$USER
+Session=plasma
+Relogin=false
+EOF"
+
+# disable asking KDE questions
+echo "Disable asking KDE questions"
+kwriteconfig6 --file ksmserverrc --group General --key loginMode default
+kwriteconfig6 --file ksmserverrc --group General --key confirmLogout false
+kwriteconfig6 --file ksmserverrc --group General --key logoutPrompt false
+kwriteconfig6 --file ksmserverrc --group General --key offerShutdown false
 
 # compile HID mode app
 echo "Compiling HID mode app..."
@@ -51,8 +80,8 @@ fi
 echo "Updating Menu-Button config"
 bash -c 'cat > /usr/lib/udev/hwdb.d/60.msi.hwdb << '\''EOF'\''
 evdev:name:AT Translated Set 2 keyboard:dmi:*:svnMicro-StarInternationalCo.,Ltd.:pnClawA1M:*
- KEYBOARD_KEY_b9=f16  #Right Button
- KEYBOARD_KEY_ba=f15  #Left Button
+ KEYBOARD_KEY_b9=f16  #Right Button (flipped until InputPlumber is fixed [should be F15])
+ KEYBOARD_KEY_ba=f15  #Left Button (flipped until InputPlumber is fixed [should be F16])
 EOF'
 
 echo "Starting InputPlumber"
@@ -79,7 +108,7 @@ After=multi-user.target suspend.target
 
 [Service]
 Type=simple
-ExecStartPre=/usr/bin/sleep 5
+ExecStartPre=/usr/bin/sleep 2
 ExecStart=/.MSI-Claw/msi-claw-gamepad-mode
 Restart=always
 User=root
