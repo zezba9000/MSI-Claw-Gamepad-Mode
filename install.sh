@@ -26,7 +26,7 @@ CONFIG=/etc/sddm.conf.d/login.conf
 touch $CONFIG
 bash -c "cat > $CONFIG <<EOF
 [Autologin]
-User=$USER
+User=$SUDO_USER
 Session=plasma
 Relogin=false
 EOF"
