@@ -12,14 +12,14 @@
 * NOTE: You may want to install a virtual/touch keyboard for desktop & enable it in KDE: "sudo pacman -S maliit-keyboard"
 * For other Arch distros there is also this DKMS driver option as well but less tested: https://aur.archlinux.org/packages/hid-msi-claw-dkms-git
 
-### Installing on CachyOS handheld-edition
+# Installing on CachyOS handheld-edition
 * Disable Secure-Boot in BIOS
 * Install using a USB hub that DOES NOT support HDMI if possible as they sometimes have issues
 * Reboot computer using keyboard and mouse to sign into Steam
 * Navigate to ```Menu->Power->Switch to Desktop```
 * Install this package and reboot
 
-# CachyOS desktop-edition
+### CachyOS desktop-edition
 * Disable Secure-Boot in BIOS
 * Run ```install.sh --desktop``` script and reboot (this should configure & install most everything needed)
 * Configure Steam to auto start and start in Big-Picture mode
