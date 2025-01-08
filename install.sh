@@ -5,17 +5,13 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # check if desktop mode enabled
-DESKTOP=false  # Default value
-
-# Iterate over all arguments
+DESKTOP=false
 for arg in "$@"; do
   case "$arg" in
     --desktop)
       DESKTOP=true
-      shift    # Remove this argument from the list
       ;;
     *)
-      # Optionally handle other arguments
       ;;
   esac
 done
@@ -23,8 +19,6 @@ done
 # install dependencies
 echo "Installing dependencies"
 pacman -Syu
-echo "Installing GCC..."
-pacman -S gcc
 echo "Installing InputPlumber..."
 pacman -S inputplumber
 
@@ -176,6 +170,15 @@ case "$1" in
 esac
 EOF'
 chmod +x $CONFIG
+
+# disable screen lock
+if [ "$DESKTOP" = true ]; then
+    kwriteconfig6 --file kscreenlockerrc --group Daemon --key Autolock --type bool false
+    kwriteconfig6 --file powermanagementprofilesrc --group AC --key sleep --type int 1800
+    kwriteconfig6 --file powermanagementprofilesrc --group Battery --key sleep --type int 900
+    qdbus org.freedesktop.ScreenSaver /ScreenSaver configure
+    kquitapp5 powerdevil && sleep 2 && powerdevil &
+fi
 
 # finish
 echo "Reloading systemd stuff..."

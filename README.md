@@ -1,6 +1,6 @@
 # Installing MSI-Claw-Gamepad-Mode
 * Install CachyOS (see below) [recomended]
-* Run "sudo ./install.sh" on a CachyOS install
+* Run ```sudo ./install.sh``` on a CachyOS install
 * Restart computer
 * Gamepade mode should now be working in Steam games, Chrome browser, CachyOS or Ubuntu like distros etc.
 
@@ -12,18 +12,18 @@
 * NOTE: You may want to install a virtual/touch keyboard for desktop & enable it in KDE: "sudo pacman -S maliit-keyboard"
 * For other Arch distros there is also this DKMS driver option as well but less tested: https://aur.archlinux.org/packages/hid-msi-claw-dkms-git
 
-# Installing on CachyOS handheld-edition
+### Installing on CachyOS handheld-edition
 * Disable Secure-Boot in BIOS
 * Install using a USB hub that DOES NOT support HDMI if possible as they sometimes have issues
 * Reboot computer using keyboard and mouse to sign into Steam
-* Navigate to "Menu->Power->Switch to Desktop"
+* Navigate to ```Menu->Power->Switch to Desktop```
 * Install this package and reboot
 
-### CachyOS desktop-edition
-* Install so the device auto logs in without needing a password
-* Install a touchscreen keyboard with: "sudo pacman -S maliit-keyboard" then in Virtual Keyboard settings enable it within KDE
-* Install Steam with: "sudo pacman -S steam"
+# CachyOS desktop-edition
+* Disable Secure-Boot in BIOS
+* Run ```install.sh --desktop``` script and reboot (this should configure & install most everything needed)
 * Configure Steam to auto start and start in Big-Picture mode
+    * If you have an MicroSD card, format it using "KDE Partition Manager" as "btrfs"
 
 # Benchmark (Shadow of the Tomb Raider)
 * Win11 24H2: Avg FPS 63 (XeSS Balanced setting)
