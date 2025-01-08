@@ -4,6 +4,22 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+# check if desktop mode enabled
+DESKTOP=false  # Default value
+
+# Iterate over all arguments
+for arg in "$@"; do
+  case "$arg" in
+    --desktop)
+      DESKTOP=true
+      shift    # Remove this argument from the list
+      ;;
+    *)
+      # Optionally handle other arguments
+      ;;
+  esac
+done
+
 # install dependencies
 echo "Installing dependencies"
 pacman -Syu
@@ -11,10 +27,13 @@ echo "Installing GCC..."
 pacman -S gcc
 echo "Installing InputPlumber..."
 pacman -S inputplumber
-echo "Installing Steam..."
-pacman -S steam
-echo "Installing Disk manager..."
-pacman -S partitionmanager
+
+if [ "$DESKTOP" = true ]; then
+    echo "Installing Steam..."
+    pacman -S steam
+    echo "Installing Disk manager..."
+    pacman -S partitionmanager
+fi
 
 # install virtual keybaord
 echo "Installing Virtual Keyboard..."
@@ -23,28 +42,34 @@ kwriteconfig6 --file kcminputrc --group OnScreenKeyboard --key Enabled true
 kwriteconfig6 --file kcminputrc --group OnScreenKeyboard --key PreferredProvider maliit
 
 # force auto-login
-echo "Enable auto-login"
-CONFIG=/etc/sddm.conf.d/login.conf
-touch $CONFIG
-bash -c "cat > $CONFIG <<EOF
-[Autologin]
-User=$SUDO_USER
-Session=plasma
-Relogin=false
-EOF"
+if [ "$DESKTOP" = true ]; then
+    echo "Enable auto-login"
+    CONFIG=/etc/sddm.conf.d/login.conf
+    touch $CONFIG
+    bash -c "cat > $CONFIG <<EOF
+    [Autologin]
+    User=$SUDO_USER
+    Session=plasma
+    Relogin=false
+    EOF"
+fi
 
 # disable asking KDE questions
-echo "Disable asking KDE questions"
-kwriteconfig6 --file ksmserverrc --group General --key loginMode default
-kwriteconfig6 --file ksmserverrc --group General --key confirmLogout false
-kwriteconfig6 --file ksmserverrc --group General --key logoutPrompt false
-kwriteconfig6 --file ksmserverrc --group General --key offerShutdown false
+if [ "$DESKTOP" = true ]; then
+    echo "Disable asking KDE questions"
+    kwriteconfig6 --file ksmserverrc --group General --key loginMode default
+    kwriteconfig6 --file ksmserverrc --group General --key confirmLogout false
+    kwriteconfig6 --file ksmserverrc --group General --key logoutPrompt false
+    kwriteconfig6 --file ksmserverrc --group General --key offerShutdown false
+fi
 
 # always mount drives
-echo "Always mount drives"
-kwriteconfig6 --file kded_device_automounterrc --group General --key AutomountEnabled true
-kwriteconfig6 --file kded_device_automounterrc --group General --key AutomountOnLogin true
-kwriteconfig6 --file kded_device_automounterrc --group General --key AutomountOnAttached true
+if [ "$DESKTOP" = true ]; then
+    echo "Always mount drives"
+    kwriteconfig6 --file kded_device_automounterrc --group General --key AutomountEnabled true
+    kwriteconfig6 --file kded_device_automounterrc --group General --key AutomountOnLogin true
+    kwriteconfig6 --file kded_device_automounterrc --group General --key AutomountOnAttached true
+fi
 
 # compile HID mode app
 echo "Compiling HID mode app..."
