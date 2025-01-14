@@ -142,9 +142,19 @@ void WriteHID(char* devicePath)
 	buf[i++] = 0;
 	buf[i++] = 60;
 	buf[i++] = 36;// we want to switch mode
-	buf[i++] = 1;// xpad mode
+	buf[i++] = 1;// XInput mode
 	buf[i++] = 0;
 	buf[i++] = 0;
+
+	/* NOTE: gamepad mode options
+	Offline = 0,
+	XInput = 1,
+	DInput = 2,
+	MSI = 3,
+	Desktop = 4,
+	BIOS = 5,
+	Testing = 6
+	*/
 	
 	printf("Sending %d bytes...\n", i);
 	result = write(fd, buf, i);
