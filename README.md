@@ -1,3 +1,7 @@
+# NOTE: ReginOS (SteamOS like distro)
+Working on a SteamOS like Arch distro that will be a much better option.<br>
+Follow ReignOS discord when announcement is ready: [Discord Link](https://disboard.org/server/1344845464175902750)
+
 # Installing MSI-Claw-Gamepad-Mode
 * Install CachyOS (see below) [recomended]
 * Run ```sudo ./install.sh``` on a CachyOS install
